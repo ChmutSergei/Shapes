@@ -3,30 +3,10 @@ package by.chmut.shapes.observer;
 import by.chmut.shapes.action.Service;
 import by.chmut.shapes.action.ServiceFactory;
 import by.chmut.shapes.entity.Shape;
+import by.chmut.shapes.warehouse.MeasurementData;
+import by.chmut.shapes.warehouse.Warehouse;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
-public class Warehouse implements Observer{
-
-    private static Warehouse instance;
-    private static Map<Long, MeasurementData> parameters;
-
-    private Warehouse() {
-        parameters = new HashMap<>();
-    }
-
-    public Map<Long, MeasurementData> getParameters() {
-        return Collections.unmodifiableMap(parameters);
-    }
-
-    public static synchronized Warehouse getInstance() {
-        if (instance == null) {
-            instance = new Warehouse();
-        }
-        return instance;
-    }
+public class ShapeObserver implements Observer{
 
     @Override
     public void handleEvent(ShapeEvent event) {
@@ -39,6 +19,7 @@ public class Warehouse implements Observer{
         data.setSquare(square);
         data.setVolume(volume);
         long id = shape.getId();
-        parameters.put(id, data);
+        Warehouse warehouse = Warehouse.getInstance();
+        warehouse.updateData(id,data);
     }
 }

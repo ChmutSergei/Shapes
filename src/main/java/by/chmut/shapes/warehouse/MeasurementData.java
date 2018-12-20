@@ -1,9 +1,17 @@
-package by.chmut.shapes.observer;
+package by.chmut.shapes.warehouse;
 
 public class MeasurementData {
 
     private double square;
     private double volume;
+
+    public MeasurementData() {
+    }
+
+    public MeasurementData(double square, double volume) {
+        this.square = square;
+        this.volume = volume;
+    }
 
     public double getSquare() {
         return square;

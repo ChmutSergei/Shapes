@@ -3,7 +3,7 @@ package by.chmut.shapes.creator;
 import by.chmut.shapes.entity.Cube;
 import by.chmut.shapes.entity.Point;
 import by.chmut.shapes.exception.DataException;
-import by.chmut.shapes.observer.Warehouse;
+import by.chmut.shapes.observer.ShapeObserver;
 import by.chmut.shapes.validation.Validator;
 
 import java.util.Arrays;
@@ -22,11 +22,11 @@ public class CubeCreator implements ShapeCreator<Cube> {
         for (int i = 0; i < COUNT_POINTS; i++) {
             points[i] = new Point(numbers[i*3], numbers[i*3+1], numbers[i*3+2]);
         }
-        if (!Validator.isCube(points)) {
+        if (!Validator.isCorrectCube(points)) {
             throw new DataException("Incorrect points - not possible to create a cube " + Arrays.toString(points));
         }
         Cube cube = new Cube();
-        cube.setWarehouse(Warehouse.getInstance());
+        cube.setObserver(new ShapeObserver());
         cube.setPoints(points);
         return cube;
     }

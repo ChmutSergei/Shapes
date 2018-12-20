@@ -1,19 +1,20 @@
 package by.chmut.shapes.repository;
 
-import by.chmut.shapes.entity.Cube;
 import by.chmut.shapes.entity.Shape;
 import by.chmut.shapes.specification.Specification;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class ShapeRepository implements Repository<Shape> {
 
     private static ShapeRepository instance;
-    private static Map<Long, Shape> repository;
+    private static List<Shape> repository;
 
     private ShapeRepository() {
-        repository = new LinkedHashMap<>();
+        repository = new ArrayList<>();
     }
 
     public static synchronized ShapeRepository getInstance() {
@@ -25,40 +26,37 @@ public class ShapeRepository implements Repository<Shape> {
 
     @Override
     public void add(Shape shape) {
-        repository.put(shape.getId(), shape);
+        repository.add(shape);
     }
 
     @Override
     public void remove(Shape shape) {
-        repository.remove(shape.getId());
+        repository.remove(shape);
     }
 
     @Override
     public void update(Shape shape) {
-        this.add(shape);
+        if (!repository.contains(shape)) {
+            repository.add(shape);
+        }
     }
 
     @Override
     public List<Shape> getAll() {
-        return repository.entrySet().stream()
-                .map(Map.Entry::getValue)
-                .collect(Collectors.toList());
+        return Collections.unmodifiableList(repository);
     }
 
     @Override
     public void sort(Comparator<Shape> comparator) {
-        repository  = repository.entrySet().stream()
-                .sorted(Map.Entry.comparingByValue(comparator))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
-                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+        repository.sort(comparator);
     }
 
     @Override
     public List<Shape> query(Specification specification) {
         List<Shape> result = new ArrayList<>();
-        for (Map.Entry entry : repository.entrySet()) {
-            if (specification.specify(entry.getValue())) {
-                result.add((Cube) entry.getValue());
+        for (Shape shape : repository) {
+            if (specification.specify(shape)) {
+                result.add(shape);
             }
         }
         return result;

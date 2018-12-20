@@ -20,7 +20,7 @@ import java.util.*;
 
 class Test {
 
-    public static void main(String[] args) throws DataException {
+    public static void main1(String[] args) throws DataException {
         double[] numbers = {-21.2, -10.7, -18.3, -21.2, 54.3, -18.3, 43.8, 54.3, -18.3, 43.8, -10.7, -18.3, -21.2, -10.7,
                 46.7, -21.2, 54.3, 46.7, 43.8, 54.3, 46.7, 43.8, -10.7, 46.7};
         ShapeCreator creator = new CubeCreator();
@@ -38,7 +38,7 @@ class Test {
             System.out.println(Arrays.toString(array));
         }
     }
-    public static void main1(String[] args) {
+    public static void main(String[] args) {
 
         DataReader reader = new DataReader();
         List<String> list = reader.read("/cubes.txt");
@@ -72,7 +72,7 @@ class Test {
         }
 
 //        changePosit(cube);
-//        System.out.println("!!!!" + Validator.isCube(cube.getPoints()) + "!!!!!!");
+//        System.out.println("!!!!" + Validator.isCorrectCube(cube.getPoints()) + "!!!!!!");
 //        for (int i = 0; i < 30; i++) {
 //            cube = changeCube(cube);
 //            Point[] points = cube.getPoints();
@@ -115,5 +115,3 @@ class Test {
     }
 
 }
-interface C{}
-interface D extends C{}

@@ -1,8 +1,8 @@
 package by.chmut.shapes.specification;
 
 import by.chmut.shapes.entity.Shape;
-import by.chmut.shapes.observer.MeasurementData;
-import by.chmut.shapes.observer.Warehouse;
+import by.chmut.shapes.warehouse.MeasurementData;
+import by.chmut.shapes.warehouse.Warehouse;
 
 public class SquareBetweenMinMax implements Specification<Shape>{
 
@@ -17,7 +17,7 @@ public class SquareBetweenMinMax implements Specification<Shape>{
     @Override
     public boolean specify(Shape shape) {
         Warehouse warehouse = Warehouse.getInstance();
-        MeasurementData data = warehouse.getParameters().get(shape.getId());
+        MeasurementData data = warehouse.getMeasurements(shape.getId());
         double square = data.getSquare();
         return square >= min & square <= max;
     }

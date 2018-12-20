@@ -2,8 +2,9 @@ package by.chmut.shapes.entity;
 
 
 import by.chmut.shapes.observer.ShapeEvent;
-import by.chmut.shapes.observer.Warehouse;
+import by.chmut.shapes.observer.ShapeObserver;
 import by.chmut.shapes.util.IdGenerator;
+import by.chmut.shapes.warehouse.Warehouse;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -14,7 +15,7 @@ public class Cube implements Shape {
 
     private long id;
     private Point[] points;
-    private Warehouse warehouse;
+    private ShapeObserver observer;
 
     public Cube() {
         this.id = IdGenerator.getId();
@@ -39,13 +40,13 @@ public class Cube implements Shape {
         notifyObservers();
     }
 
-    public void setWarehouse(Warehouse warehouse) {
-        this.warehouse = warehouse;
+    public void setObserver(ShapeObserver observer) {
+        this.observer = observer;
     }
 
     private void notifyObservers() {
-        if (warehouse != null) {
-            warehouse.handleEvent(new ShapeEvent(this));
+        if (observer != null) {
+            observer.handleEvent(new ShapeEvent(this));
         }
     }
 
@@ -56,13 +57,12 @@ public class Cube implements Shape {
         Cube cube = (Cube) object;
         return id == cube.id &&
                 Arrays.equals(points, cube.points) &&
-                Objects.equals(warehouse, cube.warehouse);
+                Objects.equals(observer, cube.observer);
     }
 
     @Override
     public int hashCode() {
-
-        int result = Objects.hash(id, warehouse);
+        int result = Objects.hash(id, observer);
         result = 31 * result + Arrays.hashCode(points);
         return result;
     }
@@ -72,7 +72,7 @@ public class Cube implements Shape {
         return "Cube{" +
                 "id=" + id +
                 ", points=" + Arrays.toString(points) +
-                warehouse.getParameters().get(id) +
+                Warehouse.getInstance().getMeasurements(id) +
                 '}';
     }
 }

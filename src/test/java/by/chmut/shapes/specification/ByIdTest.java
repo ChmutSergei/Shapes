@@ -1,13 +1,38 @@
 package by.chmut.shapes.specification;
 
-/**
- * This file is part of the ShapesTask project.
- *
- * @author Sergei Chmut  chmut.serge@gmail.com
- * <p>
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+import by.chmut.shapes.entity.Cube;
+import by.chmut.shapes.entity.Shape;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class ByIdTest {
+
+    private Specification specification;
+    private Shape shape;
+
+    @BeforeMethod
+    public void setUp() {
+        shape = new Cube();
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        shape = null;
+    }
+
+    @Test
+    public void testPositive() {
+        specification = new ById(shape.getId());
+        boolean actual = specification.specify(shape);
+        Assert.assertTrue(actual);
+    }
+
+    @Test
+    public void testNegative() {
+        specification = new ById(-1);
+        boolean actual = specification.specify(shape);
+        Assert.assertFalse(actual);
+    }
 }

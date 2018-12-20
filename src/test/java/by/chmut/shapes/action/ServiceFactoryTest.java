@@ -37,10 +37,11 @@ public class ServiceFactoryTest {
         Assert.assertEquals(actual,expected);
     }
 
+
     @Test(expectedExceptions = RuntimeException.class,
             description = "Expected RuntimeException when transferring incorrect object")
     public void getServiceNegativeTest() {
         shape = null;
-        Service<Cube> service = factory.getService(shape);
+        factory.getService(shape);
     }
 }

@@ -3,7 +3,6 @@ package by.chmut.shapes.action;
 
 import by.chmut.shapes.entity.Cube;
 import by.chmut.shapes.entity.Point;
-import by.chmut.shapes.validation.Validator;
 
 public class CheckCube {
 
@@ -17,9 +16,5 @@ public class CheckCube {
             }
         }
         return false;
-    }
-
-    public static boolean isShape(Cube cube) {
-        return Validator.isCube(cube.getPoints());
     }
 }

@@ -7,7 +7,10 @@ public class Validator {
 
     private static final int[][] POINTS_CHECK_ORDER = {{0, 1, 2, 3}, {4, 5, 6, 7}, {0, 1, 4, 5}, {1, 2, 5, 6}};
 
-    public static boolean isCube(Point[] points) {
+    public static boolean isCorrectCube(Point[] points) {
+        if (points.length != 8) {
+            return false;
+        }
         return checkSides(points) && validatePlanes(points);
     }
 
