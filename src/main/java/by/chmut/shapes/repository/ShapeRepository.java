@@ -11,13 +11,14 @@ import java.util.List;
 public class ShapeRepository implements Repository<Shape> {
 
     private static ShapeRepository instance;
-    private static List<Shape> repository;
+
+    private List<Shape> repository;
 
     private ShapeRepository() {
         repository = new ArrayList<>();
     }
 
-    public static synchronized ShapeRepository getInstance() {
+    public static ShapeRepository getInstance() {
         if (instance == null) {
             instance = new ShapeRepository();
         }
@@ -42,7 +43,7 @@ public class ShapeRepository implements Repository<Shape> {
     }
 
     @Override
-    public List<Shape> getAll() {
+    public List<Shape> findAll() {
         return Collections.unmodifiableList(repository);
     }
 

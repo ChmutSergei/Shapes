@@ -17,7 +17,7 @@ public class ExistOnFirstOctantTest {
     @BeforeMethod
     public void setUp() {
         shape = new Cube();
-        specification = new ExistInFirstOctant();
+        specification = new ExistInFirstOctantSpecification();
     }
 
     @AfterMethod

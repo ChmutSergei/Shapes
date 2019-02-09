@@ -7,7 +7,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class ByNameTest {
+public class ByNameSpecificationTest {
 
     private Specification specification;
     private Shape shape;
@@ -24,14 +24,14 @@ public class ByNameTest {
 
     @Test
     public void testPositive() {
-        specification = new ByName("Cube");
+        specification = new ByNameSpecification("Cube");
         boolean actual = specification.specify(shape);
         Assert.assertTrue(actual);
     }
 
     @Test
     public void testNegative() {
-        specification = new ByName("SomeAnotherShape");
+        specification = new ByNameSpecification("SomeAnotherShape");
         boolean actual = specification.specify(shape);
         Assert.assertFalse(actual);
     }

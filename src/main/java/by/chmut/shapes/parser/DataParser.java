@@ -11,7 +11,7 @@ import java.util.List;
 public class DataParser {
 
     private static final Logger logger = LogManager.getLogger();
-    private static final String DELIMITER = " ";
+    private static final String DELIMITER = "\\p{Blank}";
 
     public double[][] parse(List<String> data) {
         List<double[]> numbers = new ArrayList<double[]>();
@@ -22,10 +22,10 @@ public class DataParser {
                         .toArray();
                 numbers.add(params);
             } catch (NumberFormatException e) {
-                logger.warn("Incorrect data string : " + line);
+                logger.warn("Incorrect data string : " + line, e);
             }
         }
-        if (numbers.size() == 0) {
+        if (numbers.isEmpty()) {
             return new double[0][0];
         }
         double[][] result = new double[numbers.size()][numbers.get(0).length];

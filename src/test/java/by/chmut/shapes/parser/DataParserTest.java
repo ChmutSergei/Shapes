@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 public class DataParserTest {
 
-    DataParser parser;
+    private DataParser parser;
 
     @BeforeMethod
     public void setUp() {
@@ -50,14 +50,15 @@ public class DataParserTest {
         return data;
     }
 
-    @Test(dataProvider = "PositiveProvider")
+    @Test(dataProvider = "PositiveProvider",
+            description = "Expected parsing correct data without exceptions")
     public void parseTestPositive(String source, double[] expected) {
         double[][] result = parser.parse(Arrays.asList(source));
         double[] actual = result[0];
         Assert.assertEquals(actual,expected);
     }
 
-    @Test(dataProvider = "NegativeProvider")
+    @Test(dataProvider = "NegativeProvider", description = "Expected - method throws incorrect row when parse it")
     public void parseTestNegative(String source) {
         double[][] actual = parser.parse(Arrays.asList(source));
         double[][] expected = new double[0][0];

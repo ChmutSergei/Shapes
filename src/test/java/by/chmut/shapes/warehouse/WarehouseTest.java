@@ -26,14 +26,14 @@ public class WarehouseTest {
 
     @Test(priority = 0, dataProvider = "forUpdateDataNotExist")
     public void updateNotExistDataTest(long id, MeasurementData expected) {
-        warehouse.updateData(id,expected);
+        warehouse.put(id,expected);
         MeasurementData actual = warehouse.getMeasurements(id);
         Assert.assertEquals(actual,expected);
     }
 
     @Test(priority = 1, dataProvider = "forUpdateDataExist")
     public void updateExistDataTest(long id, MeasurementData expected) {
-        warehouse.updateData(id,expected);
+        warehouse.put(id,expected);
         MeasurementData actual = warehouse.getMeasurements(id);
         Assert.assertEquals(actual,expected);
     }

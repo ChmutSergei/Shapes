@@ -6,7 +6,7 @@ import java.util.Map;
 public class Warehouse {
 
     private static Warehouse instance;
-    private static Map<Long, MeasurementData> parameters;
+    private Map<Long, MeasurementData> parameters;
 
     private Warehouse() {
         parameters = new HashMap<>();
@@ -16,14 +16,14 @@ public class Warehouse {
         return parameters.get(id);
     }
 
-    public static synchronized Warehouse getInstance() {
+    public static Warehouse getInstance() {
         if (instance == null) {
             instance = new Warehouse();
         }
         return instance;
     }
 
-    public void updateData(long id, MeasurementData data) {
-        parameters.put(id, data);
+    public MeasurementData put(Long key, MeasurementData value) {
+        return parameters.put(key, value);
     }
 }

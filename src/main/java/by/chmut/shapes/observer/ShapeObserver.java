@@ -13,13 +13,13 @@ public class ShapeObserver implements Observer{
         Shape shape = event.getSource();
         ServiceFactory factory = ServiceFactory.getInstance();
         Service<Shape> service = factory.getService(shape);
-        double square = service.getSquare(shape);
-        double volume = service.getVolume(shape);
+        double square = service.calculateSquare(shape);
+        double volume = service.calculateVolume(shape);
+        long id = service.getId(shape);
         MeasurementData data = new MeasurementData();
         data.setSquare(square);
         data.setVolume(volume);
-        long id = shape.getId();
         Warehouse warehouse = Warehouse.getInstance();
-        warehouse.updateData(id,data);
+        warehouse.put(id,data);
     }
 }

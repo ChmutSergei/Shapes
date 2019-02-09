@@ -6,13 +6,13 @@ import org.apache.logging.log4j.Logger;
 
 public class ServiceFactory {
 
-    private static final Logger logger = LogManager.getLogger();
+    private final Logger logger = LogManager.getLogger();
     private static ServiceFactory instance;
 
     private ServiceFactory() {
     }
 
-    public static synchronized ServiceFactory getInstance() {
+    public static ServiceFactory getInstance() {
         if (instance == null) {
             instance = new ServiceFactory();
         }
@@ -20,7 +20,7 @@ public class ServiceFactory {
     }
 
     public Service getService(Shape shape) {
-        String name = shape.getName();
+        String name = shape.getClass().getSimpleName();
         switch (name) {
             case "Cube":
                 return new CubeService();

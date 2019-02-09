@@ -1,6 +1,5 @@
-package by.chmut.shapes.parser;
+package by.chmut.shapes.reader;
 
-import by.chmut.shapes.reader.DataReader;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
